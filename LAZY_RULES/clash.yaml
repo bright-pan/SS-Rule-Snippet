@@ -12,7 +12,7 @@ port: 7890
 socks-port: 7891
 
 # Linux 和 macOS 的 redir 透明代理端口 (重定向 TCP 和 TProxy UDP 流量)
-# redir-port: 7892
+redir-port: 7892
 
 # Linux 的透明代理端口（适用于 TProxy TCP 和 TProxy UDP 流量)
 # tproxy-port: 7893
@@ -43,11 +43,11 @@ mode: rule
 log-level: silent
 
 # clash 的 RESTful API 监听地址
-external-controller: 127.0.0.1:9090
+external-controller: 0.0.0.0:9090
 
 # 存放配置文件的相对路径，或存放网页静态资源的绝对路径
 # Clash core 将会将其部署在 http://{{external-controller}}/ui
-# external-ui: folder
+external-ui: ui
 
 # RESTful API 的口令 (可选)
 # 通过 HTTP 头中 Authorization: Bearer ${secret} 参数来验证口令
@@ -199,187 +199,727 @@ dns:
     #   - '+.youtube.com'
 
 proxies:
-  # shadowsocks
-  # 支持加密方式：
-  #   aes-128-gcm aes-192-gcm aes-256-gcm
-  #   aes-128-cfb aes-192-cfb aes-256-cfb
-  #   aes-128-ctr aes-192-ctr aes-256-ctr
-  #   rc4-md5 chacha20 chacha20-ietf xchacha20
-  #   chacha20-ietf-poly1305 xchacha20-ietf-poly1305
-
-  - name: "ss1"
-    type: ss
-    server: server
-    port: 443
-    cipher: chacha20-ietf-poly1305
-    password: "password"
-    # udp: true
-
-  - name: "ss2"
-    type: ss
-    server: server
-    port: 443
-    cipher: AEAD_CHACHA20_POLY1305
-    password: "password"
-    plugin: obfs
-    plugin-opts:
-      mode: tls # 混淆模式，可以选择 http 或 tls
-      host: bing.com # 混淆域名，需要和服务器配置保持一致
-
-  - name: "ss3"
-    type: ss
-    server: server
-    port: 443
-    cipher: AEAD_CHACHA20_POLY1305
-    password: "password"
-    plugin: v2ray-plugin
-    plugin-opts:
-      mode: websocket # 暂时不支持 QUIC 协议
-      # tls: true # wss
-      # skip-cert-verify: true
-      # host: bing.com
-      # path: "/"
-      # headers:
-      #   custom: value
-
-  # vmess
-  # 支持加密方式：auto / aes-128-gcm / chacha20-poly1305 / none
-  - name: "vmess"
-    type: vmess
-    server: server
-    port: 443
-    uuid: uuid
-    alterId: 32
-    cipher: auto
-    # udp: true
-    # tls: true
-    # skip-cert-verify: true
-    # servername: example.com # 优先级高于 wss host
-    # network: ws
-    # ws-path: /path
-    # ws-headers:
-    #   Host: v2ray.com
-
-  - name: "vmess-http"
-    type: vmess
-    server: server
-    port: 443
-    uuid: uuid
-    alterId: 32
-    cipher: auto
-    # udp: true
-    # network: http
-    # http-opts:
-    #   # method: "GET"
-    #   # path:
-    #   #   - '/'
-    #   #   - '/video'
-    #   # headers:
-    #   #   Connection:
-    #   #     - keep-alive
-
-  # socks5
-  - name: "socks"
-    type: socks5
-    server: server
-    port: 443
-    # username: username
-    # password: password
-    # tls: true
-    # skip-cert-verify: true
-    # udp: true
-
-  # http
-  - name: "http"
-    type: http
-    server: server
-    port: 443
-    # username: username
-    # password: password
-    # tls: true # https
-    # skip-cert-verify: true
-
-  # snell (注意：暂时不支持 UDP 转发)
-  - name: "snell"
-    type: snell
-    server: server
-    port: 44046
-    psk: yourpsk
-    # obfs-opts:
-    # mode: http # 或 tls
-    # host: bing.com
-
-  # Trojan
-  - name: "trojan"
+  - 
+    name: 香港-PRO-IPLC-HK2-1-流量倍率:1.0
     type: trojan
-    server: server
+    server: pro-iplc-hk2-1.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-2-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-2.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-3-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-3.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-4-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-4.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-5-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-5.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-6-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-6.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-7-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-7.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK2-8-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk2-8.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-1-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-1.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-2-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-2.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-3-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-3.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-4-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-4.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-5-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-5.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-6-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-6.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-7-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-7.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-IPLC-HK1-8-流量倍率:1.0
+    type: trojan
+    server: pro-iplc-hk1-8.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-CN2-HK1-1-流量倍率:0.5
+    type: trojan
+    server: pro-cn2-hk1-1.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-CN2-HK1-2-流量倍率:0.5
+    type: trojan
+    server: pro-cn2-hk1-2.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-CN2-HK1-3-流量倍率:0.5
+    type: trojan
+    server: pro-cn2-hk1-3.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-CN2-HK1-4-流量倍率:0.5
+    type: trojan
+    server: pro-cn2-hk1-4.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-CN2-HK1-5-流量倍率:0.5
+    type: trojan
+    server: pro-cn2-hk1-5.sstr-api.xyz
+    port: 465
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-1-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-1.sstr-api.xyz
     port: 443
-    password: yourpsk
-    # udp: true
-    # sni: example.com # 服务名称
-    # alpn:
-    #   - h2
-    #   - http/1.1
-    # skip-cert-verify: true
-
-  # ShadowsocksR
-  # 支持的加密方式: SS 中支持的所有流加密方式
-  # 支持的混淆方式:
-  #   plain http_simple http_post
-  #   random_head tls1.2_ticket_auth tls1.2_ticket_fastauth
-  # 支持的协议:
-  #   origin auth_sha1_v4 auth_aes128_md5
-  #   auth_aes128_sha1 auth_chain_a auth_chain_b
-  - name: "ssr"
-    type: ssr
-    server: server
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-2-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-2.sstr-api.xyz
     port: 443
-    cipher: chacha20-ietf
-    password: "password"
-    obfs: tls1.2_ticket_auth
-    protocol: auth_sha1_v4
-    # obfs-param: domain.tld
-    # protocol-param: "#"
-    # udp: true
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-3-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-4-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-5-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-5.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-6-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-6.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-7-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-7.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP1-8-流量倍率:0.2
+    type: trojan
+    server: pro-jp1-8.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-HK1-1-流量倍率:0.1
+    type: trojan
+    server: pro-hk1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-HK1-2-流量倍率:0.1
+    type: trojan
+    server: pro-hk1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-HK1-3-流量倍率:0.1
+    type: trojan
+    server: pro-hk1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 香港-PRO-HK1-4-流量倍率:0.1
+    type: trojan
+    server: pro-hk1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 台湾-PRO-TW1-1-流量倍率:0.1
+    type: trojan
+    server: pro-tw1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 台湾-PRO-TW1-2-流量倍率:0.1
+    type: trojan
+    server: pro-tw1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 台湾-PRO-TW1-3-流量倍率:0.1
+    type: trojan
+    server: pro-tw1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 台湾-PRO-TW1-4-流量倍率:0.1
+    type: trojan
+    server: pro-tw1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 美国-PRO-US1-1-流量倍率:0.5
+    type: trojan
+    server: pro-us1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 美国-PRO-US1-2-流量倍率:0.5
+    type: trojan
+    server: pro-us1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 美国-PRO-US1-3-流量倍率:0.5
+    type: trojan
+    server: pro-us1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 美国-PRO-US1-4-流量倍率:0.5
+    type: trojan
+    server: pro-us1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP2-1-流量倍率:0.5
+    type: trojan
+    server: pro-jp2-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP2-2-流量倍率:0.5
+    type: trojan
+    server: pro-jp2-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP2-3-流量倍率:0.5
+    type: trojan
+    server: pro-jp2-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-JP2-4-流量倍率:0.5
+    type: trojan
+    server: pro-jp2-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-1-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-2-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-3-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-4-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-5-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-5.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-6-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-6.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-7-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-7.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 荷兰-PRO-NL1-8-流量倍率:0.1
+    type: trojan
+    server: pro-nl1-8.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-1-流量倍率:0.5
+    type: trojan
+    server: pro-de1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-2-流量倍率:0.5
+    type: trojan
+    server: pro-de1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-3-流量倍率:0.5
+    type: trojan
+    server: pro-de1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-4-流量倍率:0.5
+    type: trojan
+    server: pro-de1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-5-流量倍率:0.5
+    type: trojan
+    server: pro-de1-5.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 德国-PRO-DE1-6-流量倍率:0.5
+    type: trojan
+    server: pro-de1-6.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 澳大利亚-PRO-AU1-1-流量倍率:0.5
+    type: trojan
+    server: pro-au1-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 澳大利亚-PRO-AU1-2-流量倍率:0.5
+    type: trojan
+    server: pro-au1-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 澳大利亚-PRO-AU1-3-流量倍率:0.5
+    type: trojan
+    server: pro-au1-3.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 澳大利亚-PRO-AU1-4-流量倍率:0.5
+    type: trojan
+    server: pro-au1-4.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 美国-PRO-V6-1-流量倍率:0.1
+    type: trojan
+    server: pro-v6-1.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
+  - 
+    name: 日本-PRO-V6-2-流量倍率:0.2
+    type: trojan
+    server: pro-v6-2.sstr-api.xyz
+    port: 443
+    password: J4zNwk5jEn74vsfxwJ
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
 
 proxy-groups:
-  # 代理的转发链, 在 proxies 中不应该包含 relay. 不支持 UDP.
-  # 流量: clash <-> http <-> vmess <-> ss1 <-> ss2 <-> 互联网
-  - name: "relay"
-    type: relay
-    proxies:
-      - http
-      - vmess
-      - ss1
-      - ss2
-
   # url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
   - name: "auto"
     type: url-test
     proxies:
-      - ss1
-      - ss2
-      - vmess1
-    url: 'http://www.gstatic.com/generate_204'
-    interval: 300
-
-  # fallback 可以尽量按照用户书写的服务器顺序，在确保服务器可用的情况下，自动选择服务器
-  - name: "fallback-auto"
-    type: fallback
-    proxies:
-      - ss1
-      - ss2
-      - vmess1
-    url: 'http://www.gstatic.com/generate_204'
-    interval: 300
-
-  # load-balance 可以使相同 eTLD 请求在同一条代理线路上
-  - name: "load-balance"
-    type: load-balance
-    proxies:
-      - ss1
-      - ss2
-      - vmess1
+      - 香港-PRO-IPLC-HK2-1-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-2-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-3-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-4-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-5-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-6-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-7-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-8-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-1-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-2-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-3-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-4-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-5-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-6-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-7-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-8-流量倍率:1.0
+      - 香港-PRO-CN2-HK1-1-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-2-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-3-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-4-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-5-流量倍率:0.5
+      - 日本-PRO-JP1-1-流量倍率:0.2
+      - 日本-PRO-JP1-2-流量倍率:0.2
+      - 日本-PRO-JP1-3-流量倍率:0.2
+      - 日本-PRO-JP1-4-流量倍率:0.2
+      - 日本-PRO-JP1-5-流量倍率:0.2
+      - 日本-PRO-JP1-6-流量倍率:0.2
+      - 日本-PRO-JP1-7-流量倍率:0.2
+      - 日本-PRO-JP1-8-流量倍率:0.2
+      - 香港-PRO-HK1-1-流量倍率:0.1
+      - 香港-PRO-HK1-2-流量倍率:0.1
+      - 香港-PRO-HK1-3-流量倍率:0.1
+      - 香港-PRO-HK1-4-流量倍率:0.1
+      - 台湾-PRO-TW1-1-流量倍率:0.1
+      - 台湾-PRO-TW1-2-流量倍率:0.1
+      - 台湾-PRO-TW1-3-流量倍率:0.1
+      - 台湾-PRO-TW1-4-流量倍率:0.1
+      - 美国-PRO-US1-1-流量倍率:0.5
+      - 美国-PRO-US1-2-流量倍率:0.5
+      - 美国-PRO-US1-3-流量倍率:0.5
+      - 美国-PRO-US1-4-流量倍率:0.5
+      - 日本-PRO-JP2-1-流量倍率:0.5
+      - 日本-PRO-JP2-2-流量倍率:0.5
+      - 日本-PRO-JP2-3-流量倍率:0.5
+      - 日本-PRO-JP2-4-流量倍率:0.5
+      - 荷兰-PRO-NL1-1-流量倍率:0.1
+      - 荷兰-PRO-NL1-2-流量倍率:0.1
+      - 荷兰-PRO-NL1-3-流量倍率:0.1
+      - 荷兰-PRO-NL1-4-流量倍率:0.1
+      - 荷兰-PRO-NL1-5-流量倍率:0.1
+      - 荷兰-PRO-NL1-6-流量倍率:0.1
+      - 荷兰-PRO-NL1-7-流量倍率:0.1
+      - 荷兰-PRO-NL1-8-流量倍率:0.1
+      - 德国-PRO-DE1-1-流量倍率:0.5
+      - 德国-PRO-DE1-2-流量倍率:0.5
+      - 德国-PRO-DE1-3-流量倍率:0.5
+      - 德国-PRO-DE1-4-流量倍率:0.5
+      - 德国-PRO-DE1-5-流量倍率:0.5
+      - 德国-PRO-DE1-6-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-1-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-2-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-3-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-4-流量倍率:0.5
+      - 美国-PRO-V6-1-流量倍率:0.1
+      - 日本-PRO-V6-2-流量倍率:0.2
     url: 'http://www.gstatic.com/generate_204'
     interval: 300
 
@@ -388,36 +928,72 @@ proxy-groups:
   - name: Proxy
     type: select
     proxies:
-      - ss1
-      - ss2
-      - vmess1
       - auto
-
-  - name: UseProvider
-    type: select
-    use:
-      - provider1
-    proxies:
-      - Proxy
-      - DIRECT
-
-proxy-providers:
-  provider1:
-    type: http
-    url: "url"
-    interval: 3600
-    path: ./provider1.yaml
-    health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
-  test:
-    type: file
-    path: /test.yaml
-    health-check:
-      enable: true
-      interval: 36000
-      url: http://www.gstatic.com/generate_204
+      - 香港-PRO-IPLC-HK2-1-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-2-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-3-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-4-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-5-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-6-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-7-流量倍率:1.0
+      - 香港-PRO-IPLC-HK2-8-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-1-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-2-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-3-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-4-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-5-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-6-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-7-流量倍率:1.0
+      - 香港-PRO-IPLC-HK1-8-流量倍率:1.0
+      - 香港-PRO-CN2-HK1-1-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-2-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-3-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-4-流量倍率:0.5
+      - 香港-PRO-CN2-HK1-5-流量倍率:0.5
+      - 日本-PRO-JP1-1-流量倍率:0.2
+      - 日本-PRO-JP1-2-流量倍率:0.2
+      - 日本-PRO-JP1-3-流量倍率:0.2
+      - 日本-PRO-JP1-4-流量倍率:0.2
+      - 日本-PRO-JP1-5-流量倍率:0.2
+      - 日本-PRO-JP1-6-流量倍率:0.2
+      - 日本-PRO-JP1-7-流量倍率:0.2
+      - 日本-PRO-JP1-8-流量倍率:0.2
+      - 香港-PRO-HK1-1-流量倍率:0.1
+      - 香港-PRO-HK1-2-流量倍率:0.1
+      - 香港-PRO-HK1-3-流量倍率:0.1
+      - 香港-PRO-HK1-4-流量倍率:0.1
+      - 台湾-PRO-TW1-1-流量倍率:0.1
+      - 台湾-PRO-TW1-2-流量倍率:0.1
+      - 台湾-PRO-TW1-3-流量倍率:0.1
+      - 台湾-PRO-TW1-4-流量倍率:0.1
+      - 美国-PRO-US1-1-流量倍率:0.5
+      - 美国-PRO-US1-2-流量倍率:0.5
+      - 美国-PRO-US1-3-流量倍率:0.5
+      - 美国-PRO-US1-4-流量倍率:0.5
+      - 日本-PRO-JP2-1-流量倍率:0.5
+      - 日本-PRO-JP2-2-流量倍率:0.5
+      - 日本-PRO-JP2-3-流量倍率:0.5
+      - 日本-PRO-JP2-4-流量倍率:0.5
+      - 荷兰-PRO-NL1-1-流量倍率:0.1
+      - 荷兰-PRO-NL1-2-流量倍率:0.1
+      - 荷兰-PRO-NL1-3-流量倍率:0.1
+      - 荷兰-PRO-NL1-4-流量倍率:0.1
+      - 荷兰-PRO-NL1-5-流量倍率:0.1
+      - 荷兰-PRO-NL1-6-流量倍率:0.1
+      - 荷兰-PRO-NL1-7-流量倍率:0.1
+      - 荷兰-PRO-NL1-8-流量倍率:0.1
+      - 德国-PRO-DE1-1-流量倍率:0.5
+      - 德国-PRO-DE1-2-流量倍率:0.5
+      - 德国-PRO-DE1-3-流量倍率:0.5
+      - 德国-PRO-DE1-4-流量倍率:0.5
+      - 德国-PRO-DE1-5-流量倍率:0.5
+      - 德国-PRO-DE1-6-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-1-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-2-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-3-流量倍率:0.5
+      - 澳大利亚-PRO-AU1-4-流量倍率:0.5
+      - 美国-PRO-V6-1-流量倍率:0.1
+      - 日本-PRO-V6-2-流量倍率:0.2
 
 rules:
   # 自定义规则
